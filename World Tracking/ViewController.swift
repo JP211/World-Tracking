@@ -40,6 +40,9 @@ class ViewController: UIViewController {
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x:0, y: 0.2))
+        path.addLine(to: CGPoint(x: 0.2, y: 0.3))
+        path.addLine(to: CGPoint(x: 0.4, y: 0.2))
+        path.addLine(to: CGPoint(x: 0.4, y: 0))
         let shape = SCNShape(path: path, extrusionDepth: 0.2)
         node.geometry = shape
         
