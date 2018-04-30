@@ -26,8 +26,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func add(_ sender: Any) {
+        let doorNode = SCNNode(geometry: SCNPlane(width: 0.03, height: 0.06))
+        doorNode.geometry?.firstMaterial?.diffuse.contents = UIColor.brown
+        let boxNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+        boxNode.geometry?.firstMaterial?.diffuse.contents = UIColor.darkGray
         let node = SCNNode()
-        //        node.geometry = SCNPyramid(width: 0.1, height: 0.1, length: 0.1)
+                node.geometry = SCNPyramid(width: 0.1, height: 0.1, length: 0.1)
         //        node.geometry = SCNPlane(width: 0.2, height: 0.2)
         //        node.geometry = SCNTorus(ringRadius: 0.3, pipeRadius: 0.1)
         //        node.geometry = SCNTube(innerRadius: 0.1, outerRadius: 0.2, height: 0.3)
@@ -37,22 +41,29 @@ class ViewController: UIViewController {
         //        node.geometry = SCNCapsule(capRadius: 0.1, height: 0.3)
         //        node.geometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.03)
         
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x:0, y: 0.2))
-        path.addLine(to: CGPoint(x: 0.2, y: 0.3))
-        path.addLine(to: CGPoint(x: 0.4, y: 0.2))
-        path.addLine(to: CGPoint(x: 0.4, y: 0))
-        let shape = SCNShape(path: path, extrusionDepth: 0.2)
-        node.geometry = shape
+        
+        // How to use bezier code to draw a shape
+//        let path = UIBezierPath()
+//        path.move(to: CGPoint(x: 0, y: 0))
+//        path.addLine(to: CGPoint(x:0, y: 0.2))
+//        path.addLine(to: CGPoint(x: 0.2, y: 0.3))
+//        path.addLine(to: CGPoint(x: 0.4, y: 0.2))
+//        path.addLine(to: CGPoint(x: 0.4, y: 0))
+//        let shape = SCNShape(path: path, extrusionDepth: 0.2)
+//        node.geometry = shape
         
         node.geometry?.firstMaterial?.specular.contents = UIColor.orange
         node.geometry?.firstMaterial?.diffuse.contents = UIColor.magenta
         //        let x = randomNumbers(firstNum: -0.3, secondNum: 0.3)
         //        let y = randomNumbers(firstNum: -0.3, secondNum: 0.3)
         //        let z = randomNumbers(firstNum: -0.3, secondNum: 0.3)
-        node.position = SCNVector3(0,0,-0.7)
+        node.position = SCNVector3(0.2,0.3,-0.2)
+        boxNode.position = SCNVector3(0, -0.05, 0)
+        doorNode.position = SCNVector3(0, 0, 0.06)
         self.sceneView.scene.rootNode.addChildNode(node)
+        node.addChildNode(boxNode)
+        boxNode.addChildNode(doorNode)
+//        self.sceneView.scene.rootNode.addChildNode(cylinderNode)
     }
     
     @IBAction func reset(_ sender: Any) {
